@@ -16,12 +16,10 @@ short vehiclePool[] =
     225, 153, 154, 215 // Misc
 };
 
-/* Main loop of trainer, check if a key is pressed, give player health and armor every 100ms if cheats are enabled. */
+/* Main loop of trainer, check if a key is pressed, give player health every 100ms if infinite health is enabled. */
 
 void Game::process()
 {
-    Sleep(100);
-
     checkKey();
     
     if (infiniteHealth) setHealth(255.0f);
@@ -135,13 +133,11 @@ void Game::spawnVeh(int model)
         c = -1;
     }
 
-    float* pointerToCoord = (float*)((*playerPtr) + 0x004 + 0x030);
+    float* pointerToCoord = (float*)((*playerPtr) + 0x034);
 
-    float x = *pointerToCoord + 2.25f;
-    float y = *(pointerToCoord + 1) + 2.25f;
-    float z = *(pointerToCoord + 2);
-
-    Sleep(250);
+    float x = *pointerToCoord + 4.0f;
+    float y = *(pointerToCoord + 1) + 4.0f;
+    float z = *(pointerToCoord + 2) + 0.20f;
 
     scmScript(&create_vehicle, model, x, y, z, &c);
     scmScript(&release_model, model);

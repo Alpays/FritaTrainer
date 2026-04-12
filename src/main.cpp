@@ -4,7 +4,7 @@ FritaTrainer v0.1 (C++)
 
 This is a simple yet useful trainer for GTA: Vice City written in C++
 It runs as an .asi file (which is a renamed .dll file) so unlike other trainers you don't have to run an application
-all the time to use cheats. The cheats have keyboard shortcuts ranging from F5 to F11, it has various cheats like
+all the time to use cheats. The cheats have keyboard shortcuts ranging from F5 to F12, it has various cheats like
 changing skin, spawning a vehicle and infinite money/health etc.
 
 I tried to write the code in a very simple and understandable way so if you are into gta modding it might be useful to
@@ -40,6 +40,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
     while (1)
     {
         game.process();
+        Sleep(10);
     }
 
     return 0;
@@ -50,7 +51,8 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpRese
     switch (ul_reason_for_call)
     {
         case DLL_PROCESS_ATTACH:
-            CreateThread(0, 0, MainThread, 0, 0, 0);
+            DisableThreadLibraryCalls(hModule);
+            CreateThread(0, 0, MainThread, hModule, 0, 0);
     }
     return TRUE;
 }

@@ -21,7 +21,7 @@ struct Game
 {
 	bool infiniteHealth = false;
 
-	long long lastSkinChange = 0;
+	int lastSkinChange = 0;
 
 
 	void checkKey();
