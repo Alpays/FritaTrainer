@@ -49,7 +49,7 @@ void Game::changeSkin(int skinID)
     scmScript(&load_reqmodels);
 
     while(!scmScript(&is_model_available, skinID))
-        Sleep(25);
+        Sleep(1);
 
     uintptr_t player = *(playerPtr);
 
@@ -125,7 +125,7 @@ void Game::spawnVeh(int model)
     scmScript(&load_reqmodels);
      
     // Don't spawn the car until vehicle is loaded.
-    while (!scmScript(&is_model_available, model)) Sleep(25);
+    while (!scmScript(&is_model_available, model)) Sleep(1);
     
     if (c != -1) // If a car is created delete it before creating a new one.
     {
@@ -194,7 +194,7 @@ bool Game::isPlayerMoving()
     float x, y;
 
     x = *pointerToSpeed;
-    y = *pointerToSpeed;
+    y = *(pointerToSpeed + 1);
 
     if (x == y && x == 0.00f)
         return false;

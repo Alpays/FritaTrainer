@@ -18,7 +18,7 @@ helped me with the ASM part and with the script structure.
 Keys
 
 F5 - Change Skin
-F6 - Spawn a Supercar / Heli / PCJ
+F6 - Spawn a vehicle.
 F7 - Infinite Health toggle
 F8 - Eliminate nearby peds
 F9 - Change Weather (0-6)
