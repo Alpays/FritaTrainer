@@ -41,4 +41,5 @@ classes to access members through variables instead of casting memory addresses.
 - Added a hack to incrase moon size infinitely (F12 to manually reset back to smallest size)
 - Infinite run and taxi boost jump has been enabled by default now.
 - Added ability to high jump (X when not driving or holding sniper.)
+- Nearby peds now have different death anims.
 - Optimizations to the code.
