@@ -1,10 +1,16 @@
 #include "player.h"
 
+uintptr_t getPlayer()
+{
+	return *(uintptr_t*)0x94AD28;
+}
+
+
 bool isPlayerInVehicle()
 {
 	CAutomobile* playerVeh = *(CAutomobile**)0x7E49C0;
 	// Player vehicle pointer points to player itself when not driving so we are checking if player is driving a vehicle. 
-	if ((uintptr_t)playerVeh != (uintptr_t)player)
+	if ((uintptr_t)playerVeh != getPlayer())
 	{
 		return true;
 	}
@@ -13,9 +19,12 @@ bool isPlayerInVehicle()
 
 void onPlayerKeyDown(WPARAM key)
 {
-	if(player == nullptr) player = *(CPed**)0x94AD28;
+	CPed* player = (CPed*)getPlayer();
 	switch (key)
 	{
+	case Key::SetHour:
+		game.setHour();
+		break;
 	case Key::ChangeSkin:
 		if (time(NULL) - game.lastSkinChange > 1) {
 			if (isPlayerInVehicle() == false)
@@ -31,17 +40,18 @@ void onPlayerKeyDown(WPARAM key)
 			}
 		}
 		break;
-	case Key::InfSprint:
-		game.toggleInfRun();
+	case Key::GodMode:
+		game.toggleGodMode();
 		break;
 	case Key::KillNearby:
 	{
+		CPed* p = (CPed*)getPlayer();
 		for (int i = 0; i < 10; ++i)
 		{
-			CPed* p = (CPed*)player->nearestPeds[i];
-			if (p) {
-				p->RemoveBodyPart(2, 0);
-				p->health = 0.00f;
+			CPed* nearestPed = p->nearestPeds[i];
+			if (nearestPed) {
+				nearestPed->RemoveBodyPart(rand() % 10 + 1, 0);
+				nearestPed->health = 0.00f;
 			}
 		}
 		break;
@@ -51,18 +61,24 @@ void onPlayerKeyDown(WPARAM key)
 		break;
 	case Key::FixVehicle:
 	{
-		if (isPlayerInVehicle()) 
+		if (isPlayerInVehicle())
 		{
 			CAutomobile* playerVeh = *(CAutomobile**)0x7E49C0;
 			playerVeh->Fix();
+		}
+		else
+		{
+			// also check if player is sniping as x key is used for sniper scope.
+			if(player->weaponSlot != 8)
+				player->z += 5.00f;
 		}
 		break;
 	}
 	case Key::InfMoney:
 		game.giveMoney(99999999);
 		break;
-	case Key::TaxiJump:
-		game.toggleTaxiBoostJump();
+	case Key::ResetMoon:
+		game.setMoonSize(0);
 		break;
 	case Key::ToggleLights:
 	{

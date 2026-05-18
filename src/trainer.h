@@ -16,14 +16,17 @@ extern int c; // Spawned car.
 
 namespace Key
 {
+	// Trainer Keys
+	const int SetHour = VK_F4;
 	const int ChangeSkin = VK_F5;
 	const int SpawnCar = VK_F6;
-	const int InfSprint = VK_F7;
+	const int GodMode = VK_F7;
 	const int KillNearby = VK_F8;
 	const int Weather = VK_F9;
-	const int FixVehicle = 0x58; // X
 	const int InfMoney = VK_F11;
-	const int TaxiJump = VK_F12;
+	const int ResetMoon = VK_F12;
+	// Vehicle Controls
+	const int FixVehicle = 0x58; // X
 	const int ToggleLights = 0x32; // 2
 }
 
@@ -32,10 +35,12 @@ typedef uint8_t byte;
 class Trainer
 {
 public:
+	void setHour(int h = -1);
 	void setMoonSize(int scale);
 	void setWeather(short weatherID);
-	void toggleTaxiBoostJump();
-	void toggleInfRun();
+	void toggleTaxiBoostJump(uint8_t c = -1);
+	void toggleInfRun(uint8_t c = -1);
+	void toggleGodMode(int c = -1);
 	void giveMoney(int amount);
 	void setMoney(int amount);
 
@@ -43,6 +48,11 @@ public:
 public:
 	int lastSkinChange = 0;
 	int lastVehicleSpawned = 0;
+	bool godMode = false;
+public:
+	void InstallHooks();
 };
+
+void onGameInit();
 
 extern Trainer game;

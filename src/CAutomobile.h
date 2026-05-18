@@ -7,7 +7,11 @@ class CAutomobile
 public:
 	PAD(0, 0x204);
 	float health;
-	PAD(1, 0xA8);
+
+	PAD(1, 0x94);
+	int vehicleType;
+
+	PAD(2, 0x10);
 	byte lights;
 public:
 	void Fix();

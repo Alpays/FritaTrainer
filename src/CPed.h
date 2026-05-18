@@ -13,7 +13,9 @@ public:
 	float health;
 	float armor;
 	PAD(3, 0x210);
-	uintptr_t* nearestPeds[10];
+	CPed* nearestPeds[10];
+	PAD(4, 0x78);
+	uint8_t weaponSlot;
 
 	void RemoveBodyPart(int nodeId, int direction);
 	void changeSkin(int skinID);
@@ -22,5 +24,3 @@ public:
 	bool isMoving();
 
 };
-
-extern CPed* player;
