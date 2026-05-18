@@ -3,7 +3,9 @@
 This is a trainer for GTA: Vice City written in C++
 It runs as an .asi file (which is a renamed .dll file) so unlike other trainers you don't have to run an application
 all the time to use cheats. The cheats have keyboard shortcuts It has various cheats like
-changing skin, spawning a vehicle etc.
+changing skin, spawning a vehicle etc. 
+
+I made this to learn more about reverse engineering and game hacking, there is no other open source GTA: Vice City trainer out there in GitHub and this trainer features various game hacking techniques such as function hooking, calling internal functions and memory editing. It can be useful if you want to make your own trainer for gta vc or your own mod for gta3/sa/vc games. 
 
 <img width="1920" height="1080" alt="Ekran Görüntüsü (9994)" src="https://github.com/user-attachments/assets/5e26185a-8223-46c5-b441-26747edc0118" />
 
@@ -14,7 +16,7 @@ changing skin, spawning a vehicle etc.
 
 - F5 - Change Skin 
 - F6 - Spawn a vehicle.
-- F7 - Toggle Infinite Run
+- F7 - Toggle god mode.
 - F8 - Eliminate nearby peds
 - F9 - Change Weather (0-6)
 - F11 - Give yourself money.
@@ -22,7 +24,7 @@ changing skin, spawning a vehicle etc.
 
 -- Vehicle Controls
 
-- X - Fix a vehicle
+- X - Fix a vehicle (high jump when not in a vehicle.)
 - 2- Toggle vehicle lights (The game only renders vehicle lights at night)
 
 # v0.2 Updates
