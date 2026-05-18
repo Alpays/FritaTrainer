@@ -1,4 +1,4 @@
-# FritaTrainer v0.2 (C++)
+# FritaTrainer v0.3 (C++)
 
 This is a trainer for GTA: Vice City written in C++
 It runs as an .asi file (which is a renamed .dll file) so unlike other trainers you don't have to run an application
@@ -32,3 +32,13 @@ There are now memory protections, no assembly code, rewritten some of the game's
 classes to access members through variables instead of casting memory addresses.
 - Added ability to run infinite
 - Added ability to toggle vehicle lights.
+
+# v0.3 Updates
+
+- Added a key to fast forward game hour by six hours.
+- Fixed game crashing when trying to fix bikes.
+- Added godmode.
+- Added a hack to incrase moon size infinitely (F12 to manually reset back to smallest size)
+- Infinite run and taxi boost jump has been enabled by default now.
+- Added ability to high jump (X when not driving or holding sniper.)
+- Optimizations to the code.
