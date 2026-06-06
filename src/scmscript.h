@@ -43,6 +43,11 @@ const SCM_COMMAND release_model = { 0x0249, "i" };
 const SCM_COMMAND create_vehicle = { 0x00A5, "ifffv" };
 const SCM_COMMAND delete_vehicle = { 0x00A6, "v" };
 
+const SCM_COMMAND create_player = { 0x053, "ifffv" };
+const SCM_COMMAND get_player_char = { 0x01F5, "vv" };
+const SCM_COMMAND set_player_ammo = { 0x017A, "vii" };
+const SCM_COMMAND set_player_health = { 0x0222, "vi" };
+
 
 // Our function to call SCM opcodes with parameters.
 int scmScript(const SCM_COMMAND* command, ...);

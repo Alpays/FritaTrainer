@@ -2,20 +2,24 @@
 
 #include "trainer.h"
 
+class CAutomobile;
+
 class CPed
 {
 public:
-	PAD(0, 0x34);
-	float x, y, z;
-	PAD(1, 0x30);
-	float sX, sY, sZ;
-	PAD(2, 0x2D8);
-	float health;
-	float armor;
-	PAD(3, 0x210);
-	CPed* nearestPeds[10];
-	PAD(4, 0x78);
-	uint8_t weaponSlot;
+    PAD(0, 0x34);
+    float x, y, z;
+    PAD(1, 0x30);
+    float sX, sY, sZ;
+    PAD(2, 0x2D8); 
+    float health;
+    float armor; 
+    PAD(3, 0x4C);
+    CAutomobile* veh;
+    PAD(4, 0x1C0); 
+    CPed* nearestPeds[10];
+    PAD(5, 0x78);      
+    uint8_t weaponSlot;              
 
 	void RemoveBodyPart(int nodeId, int direction);
 	void changeSkin(int skinID);

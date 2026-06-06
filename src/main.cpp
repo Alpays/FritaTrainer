@@ -51,6 +51,9 @@ v0.3 Updates
 - Eliminating nearby peds have various animmations now.
 - Optimizations to the code.
 
+v0.4 Updates
+- Added a class to add hooks.
+- Added 'Cheat Activated' message when using some cheats.
 
 - syaplA
 
@@ -84,7 +87,7 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpRese
     {
     case DLL_PROCESS_ATTACH:
         srand(time(NULL));
-        game.InstallHooks();
+        InstallHooks();
         oldWndProc = SetWindowLong(*(HWND*)0x7897A4, -4, (LONG)WndProcSubclass);
         break;
     case DLL_THREAD_ATTACH:

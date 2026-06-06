@@ -30,6 +30,7 @@ void onPlayerKeyDown(WPARAM key)
 			if (isPlayerInVehicle() == false)
 			{
 				player->changeSkin(rand() % 99);
+				game.cheatEnabled();
 			}
 		}
 		break;
@@ -37,11 +38,14 @@ void onPlayerKeyDown(WPARAM key)
 		if (time(NULL) - game.lastVehicleSpawned > 1) {
 			if (isPlayerInVehicle() == false) {
 				player->spawnCarNearby(game.randomVeh());
+				game.cheatEnabled();
 			}
 		}
 		break;
 	case Key::GodMode:
 		game.toggleGodMode();
+		if(game.godMode)
+			game.cheatEnabled();
 		break;
 	case Key::KillNearby:
 	{
@@ -52,12 +56,14 @@ void onPlayerKeyDown(WPARAM key)
 			if (nearestPed) {
 				nearestPed->RemoveBodyPart(rand() % 10 + 1, 0);
 				nearestPed->health = 0.00f;
+				game.cheatEnabled();
 			}
 		}
 		break;
 	}
 	case Key::Weather:
 		game.setWeather(rand() % 7);
+		game.cheatEnabled();
 		break;
 	case Key::FixVehicle:
 	{
@@ -65,6 +71,7 @@ void onPlayerKeyDown(WPARAM key)
 		{
 			CAutomobile* playerVeh = *(CAutomobile**)0x7E49C0;
 			playerVeh->Fix();
+			game.cheatEnabled();
 		}
 		else
 		{
@@ -76,9 +83,11 @@ void onPlayerKeyDown(WPARAM key)
 	}
 	case Key::InfMoney:
 		game.giveMoney(99999999);
+		game.cheatEnabled();
 		break;
 	case Key::ResetMoon:
 		game.setMoonSize(0);
+		game.cheatEnabled();
 		break;
 	case Key::ToggleLights:
 	{

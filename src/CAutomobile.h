@@ -2,6 +2,8 @@
 
 #include "trainer.h"
 
+class CPed;
+
 class CAutomobile
 {
 public:

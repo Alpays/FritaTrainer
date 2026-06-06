@@ -135,80 +135,25 @@ void Trainer::setHour(int hour)
     VirtualProtect(addr, sizeof(uint8_t), oldProtect, &np);
 }
 
-// -- Game Internal Function Hooks --
-
-static __declspec(naked) void hook_onGameInit()
+static ushort* GetGxtPointer(const char* gxt_key)
 {
-
-    // Call our hooked init function, then execute the overrode bytes, then resume execution.
-    _asm
-    {
-        pushad
-        call onGameInit
-        popad
-
-        push ebx
-        sub esp, 70h
-        push 0
-
-        mov eax, 0x4A6196
-        jmp eax
-    }    
+    void* gxt_class = (void*)0x94B220;
+    return ((ushort * (__thiscall*)(void*, const char*))0x584F30)(gxt_class, gxt_key);
 }
 
-void onGameInit()
+void Trainer::cheatEnabled()
 {
-    
-    DWORD oldProtect, np;
-   
-    // Set Infinite Run & Taxi Boost jump by default
-
-    game.toggleInfRun(1);
-    game.toggleTaxiBoostJump(1);
-    
-
-    // Install our hack to prevent moon size resetting.
-    
-    DWORD moonAddr = 0x5CC8B1;
-
-    VirtualProtect((void*)moonAddr, 3, PAGE_EXECUTE_READWRITE, &oldProtect);
-    memset((void*)moonAddr, 0x90, 3);
-    VirtualProtect((void*)moonAddr, 3, oldProtect, &np);
-    
-    // Since we executed our code lets remove our hook as we are not going to call it again.
-    
-    uint8_t* Render2DStuff = (uint8_t*)0x4A6190;
-    uint8_t oldBytes[6] = { 0x53, 0x83, 0xEC, 0x70, 0x6A, 0x00 };
-    
-
-    VirtualProtect((void*)Render2DStuff, 6, PAGE_EXECUTE_READWRITE, &oldProtect);
-
-    for (int i = 0; i < 6; ++i)
-    {
-        memset(Render2DStuff + i, oldBytes[i], 1);
-    }
-
-    VirtualProtect((void*)Render2DStuff, 6, oldProtect, &np);
-
-    
+    SetHelpMessage("CHEAT1", true, 0);
 }
 
-void Trainer::InstallHooks()
+void Trainer::SetHelpMessage(const char* gxt_key, bool isShort, int isPerma)
 {
-    // Hook onGameInit() on Render2DStuff()
-    uint8_t* Render2DStuff = (uint8_t*)0x4A6190;
-    uintptr_t GameInit = (uintptr_t)hook_onGameInit;
-    DWORD jumpAddr = (DWORD)GameInit - ((DWORD)Render2DStuff + 5);
+    ushort* gxtPointer = GetGxtPointer(gxt_key);
+    ((void(__cdecl*)(ushort * gxtPointer, bool isShort, int isPerma))0x55BFC0)(gxtPointer, true, 0);
+}
 
-    DWORD oldProtect, np;
-    VirtualProtect((void*)Render2DStuff, 6, PAGE_EXECUTE_READWRITE, &oldProtect);
-
-    memset(Render2DStuff, 0xE9, 1);
-    memset(Render2DStuff + 1, jumpAddr         & 0xFF, 1);
-    memset(Render2DStuff + 2, (jumpAddr >> 8)  & 0xFF, 1);
-    memset(Render2DStuff + 3, (jumpAddr >> 16) & 0xFF, 1);
-    memset(Render2DStuff + 4, (jumpAddr >> 24) & 0xFF, 1);
-    memset(Render2DStuff + 5, 0x00, 1);
-
-    VirtualProtect((void*)Render2DStuff, 6, oldProtect, &np);
+void Trainer::Announce(const char* gxt_key, uint milliseconds, uint style)
+{
+    ushort* gxtPointer = GetGxtPointer(gxt_key);
+    ((void(__cdecl*)(ushort * gxtPointer, uint ms, uint style))0x583F40)(gxtPointer, milliseconds, style);
 }
