@@ -46,6 +46,7 @@ classes to access members through variables instead of casting memory addresses.
 - Nearby peds now have different death anims.
 - Optimizations to the code.
 
-- # v0.4 Updates
+  # v0.4 Updates
+
 - Added a class to add hooks.
 - Added 'Cheat Activated' message when using some cheats.
