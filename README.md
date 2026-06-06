@@ -1,4 +1,4 @@
-# FritaTrainer v0.3 (C++)
+# FritaTrainer v0.4 (C++)
 
 This is a trainer for GTA: Vice City written in C++
 It runs as an .asi file (which is a renamed .dll file) so unlike other trainers you don't have to run an application
@@ -45,3 +45,7 @@ classes to access members through variables instead of casting memory addresses.
 - Added ability to high jump (X when not driving or holding sniper.)
 - Nearby peds now have different death anims.
 - Optimizations to the code.
+
+- # v0.4 Updates
+- Added a class to add hooks.
+- Added 'Cheat Activated' message when using some cheats.
